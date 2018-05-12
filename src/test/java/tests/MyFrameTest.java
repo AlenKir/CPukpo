@@ -20,7 +20,31 @@ public class MyFrameTest {
     window = new FrameFixture(frame);
     window.show();
   }
-
+  
+    @Test
+    public void somePatterns() {
+      window.textBox("EnterString").enterText("abc");
+      window.textBox("EnterPattern").enterText("a, b");
+      window.button("Execute").click();
+      window.textBox("Result").requireText("[0, 1]");
+    }
+    
+    @Test
+    public void somePatternsOneOfThemDoesntExist() {
+      window.textBox("EnterString").enterText("abc");
+      window.textBox("EnterPattern").enterText("a, g");
+      window.button("Execute").click();
+      window.textBox("Result").requireText("[0]");
+    }
+    
+    @Test
+    public void somePatternsWhichDoesntExist() {
+      window.textBox("EnterString").enterText("abc");
+      window.textBox("EnterPattern").enterText("e, g");
+      window.button("Execute").click();
+      window.textBox("Result").requireText("");
+    }
+    
   @Test
   public void AllFieldsInPlaces()
   {
@@ -34,35 +58,8 @@ public class MyFrameTest {
     window.textBox("EnterString").enterText("a");
     window.textBox("EnterPattern").enterText("a");
     window.button("Execute").click();
+
     window.textBox("Result").requireText("[0]");
-  }
-  
-  @Test
-  public void shouldFindPatternTheLastWhenClickExecute() {
-    window.textBox("EnterString").enterText("abc");
-    window.textBox("EnterPattern").enterText("c");
-    window.button("Execute").click();
-    window.textBox("Result").requireText("[2]");
-  }
-  
-  @Test
-  public void shouldFindPatternInTheMiddleWhenClickExecute() {
-    window.textBox("EnterString").enterText("abc");
-    window.textBox("EnterPattern").enterText("b");
-    window.button("Execute").click();
-    window.textBox("Result").requireText("[1]");
-  }
-  
-  @Test
-  public void shouldEmptyAllFieldWhenTheClickExecuteAndCancel_AllWereNotEmpty()
-  {
-    window.textBox("EnterString").enterText("a");
-    window.textBox("EnterPattern").enterText("a");
-    window.button("Execute").click();
-    window.button("Cancel").click();
-    window.textBox("Result").requireText("");
-    window.textBox("EnterString").requireText("");
-    window.textBox("EnterPattern").requireText("");
   }
   
   @Test
