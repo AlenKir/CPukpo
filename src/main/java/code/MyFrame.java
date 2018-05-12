@@ -128,13 +128,22 @@ public class MyFrame extends JFrame implements ActionListener {
         this();
         setName(name);
     }
+    
+    private List<String> seekPatterns(String patterns)
+    {
+    	List<String> found = new ArrayList<String>();
+    	if (!patterns.contains(","))
+    		found.add(patterns);
+    	//else
+    		//;
+        return found;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {   
         String string = textField.getText();
         String pattern = textField2.getText();
-        List<String> patterns = new ArrayList<String>();
-        patterns.add(pattern);
+        List<String> patterns = seekPatterns(pattern);
         List<Integer> result = AhoCorasick.find(string, patterns);
         String res = result.toString();
         //label3.setText(res);
