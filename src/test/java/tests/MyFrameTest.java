@@ -58,7 +58,12 @@ public class MyFrameTest {
     window.textBox("EnterString").enterText("a");
     window.textBox("EnterPattern").enterText("a");
     window.button("Execute").click();
-
+    try {
+		Thread.sleep(100);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     window.textBox("Result").requireText("[0]");
   }
   
