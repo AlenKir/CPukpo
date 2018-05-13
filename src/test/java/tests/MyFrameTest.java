@@ -20,22 +20,6 @@ public class MyFrameTest {
     window = new FrameFixture(frame);
     window.show();
   }
-  
-    @Test
-    public void somePatterns() {
-      window.textBox("EnterString").enterText("abc");
-      window.textBox("EnterPattern").enterText("a, b");
-      window.button("Execute").click();
-      window.textBox("Result").requireText("[0, 1]");
-    }
-    
-    @Test
-    public void somePatternsOneOfThemDoesntExist() {
-      window.textBox("EnterString").enterText("abc");
-      window.textBox("EnterPattern").enterText("a, g");
-      window.button("Execute").click();
-      window.textBox("Result").requireText("[0]");
-    }
     
     @Test
     public void somePatternsWhichDoesntExist() {
@@ -51,20 +35,6 @@ public class MyFrameTest {
       window.textBox("EnterString").requireVisible();
       window.textBox("EnterPattern").requireVisible();
       window.textBox("Result").requireVisible();
-  }
-  
-  @Test
-  public void shouldFindPatternTheFirstWhenClickExecute() {
-    window.textBox("EnterString").enterText("a");
-    window.textBox("EnterPattern").enterText("a");
-    window.button("Execute").click();
-    try {
-		Thread.sleep(100);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-    window.textBox("Result").requireText("[0]");
   }
   
   @Test
